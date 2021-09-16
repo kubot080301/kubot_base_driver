@@ -1,0 +1,19 @@
+<launch>
+	<arg name="go_home" default="false"/>
+
+	<group if="$(arg go_home)">
+		<node pkg="kubot_control" type="navigation_multi_goals.py" respawn="false" name="navigation_multi_goals" output="screen">
+			<param name="goalListX" value="2.0, 3.0, 3.0, 2.0" />
+			<param name="goalListY" value="1.0, 1.0, 0.0, 1.0" />
+			<param name="goalListYaw" value="0.0, -90.0, -180.0, 0.0" />
+		</node>
+	</group>
+
+	<group unless="$(arg go_home)">
+		<node pkg="kubot_control" type="navigation_multi_goals.py" respawn="false" name="navigation_multi_goals" output="screen">
+			<param name="goalListX" value="2.0, 0.0, 0.0, 1.0, 0.0" />
+			<param name="goalListY" value="1.0, -3.0, -2.0, -3.0, -3.0" />
+			<param name="goalListYaw" value="0.0, -180.0, -180.0, -180.0, -180.0" />
+		</node>
+	</group>
+</launch>
