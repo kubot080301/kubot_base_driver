@@ -1,0 +1,21 @@
+<launch>
+    <arg name="driver_baudrate" default="$(env KUBOT_DRIVER_BAUDRATE)" doc="kubot driver baudrate" />
+    <arg name="publish_tf" default="true" doc="kubot driver publish_tf" />
+    <arg name="robot_ip" default="$(env ROS_IP)" doc="kubot driver robot_ip" />
+    <arg name="port" default="/dev/kubot" />
+    
+    <!-- KUBOT DRIVER -->
+    <node name="kubot_driver" pkg="kubot_bringup" type="kubot_driver" output="screen">
+        <param name="base_frame" value="footprint" />
+        <param name="baudrate" value="$(arg driver_baudrate)" />
+        <param name="robot_ip" value="$(arg robot_ip)" />
+        <param name="cmd_vel_topic" value="cmd_vel" />
+        <param name="odom_frame" value="odom" />
+        <param name="odom_topic" value="odom" if="$(arg publish_tf)"/>
+        <param name="odom_topic" value="wheel_odom" unless="$(arg publish_tf)" />
+        <param name="out_pid_debug_enable" value="true" />
+        <param name="mcu_battery_volatge" value="true"/>
+        <param name="port" value="$(arg port)" />
+        <param name="publish_tf" value="$(arg publish_tf)" />
+    </node>
+</launch>
