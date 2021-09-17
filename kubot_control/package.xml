@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <package format="2">
 	<name>kubot_control</name>
-	<version>0.3.8</version>
+	<version>1.0.4</version>
 	<description>
-   	The kubot_control package.
+   	KUBOT Robots' basic control package.
 	</description>
 	<maintainer email="YunHong.Wang@ShanYangYe.com">Yun Hong</maintainer>
 
 	<license>Apache 2.0</license>
 
-	<!-- KUBOT ROS  -->
+	<!-- KUBOT ROS -->
 	<author>KUBOT</author>
 	<author email="t105408001@ntut.org.tw">Yun Hong</author>
 
@@ -18,6 +18,5 @@
 	<!-- The export tag contains other, unspecified, tags -->
 	<export>
 		<!-- Other tools can request additional information be placed here -->
-
 	</export>
 </package>
