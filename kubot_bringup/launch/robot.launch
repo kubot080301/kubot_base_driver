@@ -1,10 +1,10 @@
 <launch>
-	<arg name="use_imu" default="false" doc="use imu ekf in KUBOT"/>
+	<arg name="use_imu" default="false" doc="use imu and robot pose ekf"/>
 	<arg name="use_odom" value="true" doc="use /odom or /wheel_odom in KUBOT"/>
 
-	<arg name="model" default="$(env KUBOT_MODEL)" doc="model type [kubot2, wagv, aider ,neuronbot2 ,galiray2]"/>
-	<arg name="lidar" default="$(env KUBOT_LIDAR)" doc="model type [non-lidar, rplidar-a1, rplidar-a2, rplidar-a3, rplidar-s1, eai-x4, eai-g4, xtion, kinectV1, kinectV2, astra, eai-x4, d435i, sick-tim551, hokuyo-10ls, two-rplidar-a2 ]"/>
-	<arg name="sensor" default="$(env KUBOT_3DSENSOR)" doc="model type [non-3dsensor, xtion, astra, kinectV1, kinectV2, d435i, logi-c615]"/>
+	<arg name="model" default="$(env KUBOT_MODEL)" doc="which kubot robot model you set"/>
+	<arg name="lidar" default="$(env KUBOT_LIDAR)" doc="which kubot lidar you set"/>
+	<arg name="camera" default="$(env KUBOT_CAMERA)" doc="which kubot camera you set"/>
 
 	<!-- KUBOT DRIVER -->
 	<include if    ="$(arg use_imu)" file="$(find kubot_bringup)/launch/bringup_with_ekf.launch"/>
@@ -20,5 +20,5 @@
 
 	<!-- 3D SENSOR -->
 	<include file="$(find kubot_3dsensor)/launch/$(arg sensor).launch"/>
-	<node pkg="web_video_server" type="web_video_server" name="web_video_server" unless="$(eval arg('sensor') == 'non-3dsensor')"/>
+	<node pkg="web_video_server" type="web_video_server" name="web_video_server" unless="$(eval arg('camera') == 'non-3dsensor')"/>
 </launch>

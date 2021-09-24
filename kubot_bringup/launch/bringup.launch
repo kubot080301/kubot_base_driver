@@ -1,7 +1,7 @@
 <launch>
-    <arg name="driver_baudrate" default="$(env KUBOT_DRIVER_BAUDRATE)" doc="kubot driver baudrate" />
-    <arg name="publish_tf" default="true" doc="kubot driver publish_tf" />
-    <arg name="robot_ip" default="$(env ROS_IP)" doc="kubot driver robot_ip" />
+    <arg name="driver_baudrate" default="$(env KUBOT_DRIVER_BAUDRATE)" doc="kubot driver board baudrate" />
+    <arg name="publish_tf" default="true" doc="kubot driver publish tf" />
+    <arg name="robot_ip" default="$(env ROS_IP)" doc="kubot driver robot ros ip" />
     <arg name="port" default="/dev/kubot" />
     
     <!-- KUBOT DRIVER -->
@@ -17,5 +17,6 @@
         <param name="mcu_battery_volatge" value="true"/>
         <param name="port" value="$(arg port)" />
         <param name="publish_tf" value="$(arg publish_tf)" />
+        <param name="freq" value="1000" />
     </node>
 </launch>
