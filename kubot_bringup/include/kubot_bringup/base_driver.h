@@ -27,6 +27,15 @@ class BaseDriver
 private:
 	BaseDriver();
 
+	static BaseDriver* instance;
+
+	BaseDriverConfig bdg;
+	boost::shared_ptr<Transport> trans;
+	boost::shared_ptr<Dataframe> frame;
+
+	ros::NodeHandle nh;
+	ros::NodeHandle pn;
+
 public:
 	static BaseDriver* Instance()
 	{
@@ -36,21 +45,9 @@ public:
 		return instance;
 	}
 	~BaseDriver();
+
 	void work_loop();
 
-private:
-	void cmd_vel_callback(const geometry_msgs::Twist& vel_cmd);
-	void init_cmd_odom();
-	void init_pid_debug();
-
-	void read_param();
-
-	void update_param();
-	void update_odom();
-	void update_speed();
-	void update_pid_debug();
-
-public:
 	BaseDriverConfig& getBaseDriverConfig()
 	{
 		return bdg;
@@ -66,24 +63,26 @@ public:
 		return &pn;
 	}
 
+// Get robot parameter
 private:
-	static BaseDriver* instance;
+	void update_param();
+	void read_param();
 
-	BaseDriverConfig bdg;
-	boost::shared_ptr<Transport> trans;
-	boost::shared_ptr<Dataframe> frame;
 
+// Set command velocity...
+private:
+	void init_cmd_odom();
+	void update_speed();
+	void cmd_vel_callback(const geometry_msgs::Twist& vel_cmd);
 	ros::Subscriber cmd_vel_sub;
 
-	ros::Publisher odom_pub;
+	double last_cmd_vel_time;
+	bool need_update_speed;
 
-	nav_msgs::Odometry odom;
-	geometry_msgs::TransformStamped odom_trans;
-	tf::TransformBroadcaster odom_broadcaster;
-
-	ros::NodeHandle nh;
-	ros::NodeHandle pn;
-
+// Set pid debug...
+private:
+	void init_pid_debug();
+	void update_pid_debug();
 #define MAX_MOTOR_COUNT 4
 	ros::Publisher pid_debug_pub_input[MAX_MOTOR_COUNT];
 	ros::Publisher pid_debug_pub_output[MAX_MOTOR_COUNT];
@@ -91,9 +90,13 @@ private:
 	std_msgs::Int32 pid_debug_msg_input[MAX_MOTOR_COUNT];
 	std_msgs::Int32 pid_debug_msg_output[MAX_MOTOR_COUNT];
 
-	bool need_update_speed;
-
-	double last_cmd_vel_time;
+// Set odom...
+private:
+	void update_odom();
+	ros::Publisher odom_pub;
+	nav_msgs::Odometry odom;
+	geometry_msgs::TransformStamped odom_trans;
+	tf::TransformBroadcaster odom_broadcaster;
 
 // Get IMU data...
 private:
@@ -113,7 +116,7 @@ private:
 	kubot_msgs::RawSona raw_sona_data_msgs;
 	ros::Publisher raw_sona_data_pub;
 
-// Get Driver Board status...
+// Get robot status...
 private:
 	void init_robot_status();
 	void update_robot_status();

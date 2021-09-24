@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
-<package>
+<package format="2">
 	<name>kubot_msgs</name>
 	<version>1.1.18</version>
 	<description>
-   Messages and Services definitions for the KUBOT Robot.
+   KUBOT Robot messages and Services definitions.
 	</description>
 	<maintainer email="YunHong.Wang@ShanYangYe.com">Yun Hong</maintainer>
 
 	<license>Apache 2.0</license>
 
-	<!-- KUBOT ROS1  -->
+	<!-- KUBOT ROS1 -->
 	<author>KUBOT</author>
 	<author email="t105408001@ntut.org.tw">Yun Hong</author>
 
@@ -21,8 +21,9 @@
 	<run_depend>geometry_msgs</run_depend>
 	<run_depend>message_runtime</run_depend>
 
-	<export>
-	</export>
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
 </package>
-
-
