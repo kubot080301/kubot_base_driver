@@ -3,7 +3,7 @@
 	<name>kubot_bringup</name>
 	<version>1.1.18</version>
 	<description>
-  	KUBOT Robot Driver Board bringup package.
+  KUBOT Robots' Driver Board bringup package.
 	</description>
 	<maintainer email="YunHong.Wang@ShanYangYe.com">Yun Hong</maintainer>
 
@@ -20,5 +20,5 @@
 	<export>
 		<!-- Other tools can request additional information be placed here -->
 
-  </export>
+	</export>
 </package>
